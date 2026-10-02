@@ -3,90 +3,570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công nghệ số trong cuộc sống hiện nay - Lab 5 Ex 3.1</title>
+    <meta name="description" content="Trang giới thiệu cá nhân và các sản phẩm nội dung số.">
+    <title>Hồ sơ cá nhân | Sản phẩm số</title>
     <style>
+        :root {
+            color-scheme: light;
+            --ink: #17233b;
+            --muted: #68758c;
+            --brand: #365cf5;
+            --brand-dark: #2442c8;
+            --surface: #fff;
+            --line: #e5eaf3;
+            --background: #f5f7fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            margin: 0;
+            background: var(--background);
+            color: var(--ink);
+            font-family: "Segoe UI", Arial, sans-serif;
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+            border-bottom: 1px solid rgba(229, 234, 243, 0.8);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            display: flex;
+            width: min(1080px, calc(100% - 40px));
+            min-height: 68px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
         }
-        header, section, footer {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .brand {
+            color: var(--brand);
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            text-decoration: none;
         }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--brand);
+        }
+
+        main {
+            width: min(1080px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .hero {
+            position: relative;
+            display: grid;
+            min-height: 390px;
+            margin: 38px 0 30px;
+            padding: clamp(30px, 7vw, 76px);
+            overflow: hidden;
+            align-items: center;
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.2), transparent 28%),
+                linear-gradient(120deg, #213eae 0%, #4269f5 58%, #7d8fff 100%);
+            color: #fff;
+            box-shadow: 0 22px 55px rgba(54, 92, 245, 0.2);
+        }
+
+        .hero::after {
+            position: absolute;
+            right: -70px;
+            bottom: -180px;
+            width: 390px;
+            height: 390px;
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            border-radius: 50%;
+            content: "";
+            box-shadow: 0 0 0 36px rgba(255, 255, 255, 0.04), 0 0 0 72px rgba(255, 255, 255, 0.035);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: #dce4ff;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
         h1 {
-            color: #1a73e8;
-            font-size: 24px;
+            margin-bottom: 14px;
+            font-size: clamp(2.2rem, 6vw, 4.1rem);
+            letter-spacing: -0.055em;
+            line-height: 1.1;
         }
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
+
+        .hero-role {
+            margin-bottom: 16px;
+            color: #e3e9ff;
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            font-weight: 600;
         }
-        .media-container {
-            text-align: center;
-            margin: 20px 0;
+
+        .hero-intro {
+            max-width: 600px;
+            margin-bottom: 26px;
+            color: #edf0ff;
         }
-        img {
+
+        .button {
+            display: inline-flex;
+            min-height: 46px;
+            padding: 10px 18px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            background: #fff;
+            color: var(--brand-dark);
+            font-weight: 750;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 30, 85, 0.2);
+        }
+
+        .section-heading {
+            display: flex;
+            margin: 54px 0 22px;
+            align-items: end;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 4px;
+            font-size: clamp(1.65rem, 3vw, 2rem);
+            letter-spacing: -0.04em;
+        }
+
+        .section-heading p {
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        .about-card,
+        .product-card {
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: var(--surface);
+            box-shadow: 0 10px 30px rgba(24, 44, 86, 0.045);
+        }
+
+        .about-card {
+            display: grid;
+            padding: clamp(22px, 4vw, 36px);
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+        }
+
+        .about-card h3,
+        .product-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .about-card p,
+        .product-card p {
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        .profile-details {
+            display: grid;
+            margin: 0;
+            gap: 14px;
+        }
+
+        .profile-details div {
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .profile-details div:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .profile-details dt {
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .profile-details dd {
+            margin: 2px 0 0;
+            font-weight: 650;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .product-card {
+            min-width: 0;
+            padding: 22px;
+        }
+
+        .product-card--video {
+            grid-column: 1 / -1;
+        }
+
+        .product-topline {
+            display: flex;
+            margin-bottom: 14px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .product-type {
+            display: inline-flex;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: #eef1ff;
+            color: var(--brand-dark);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .product-number {
+            color: #9aa5b8;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .product-preview {
+            margin-top: 18px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #f8f9fc;
+        }
+
+        .image-preview {
+            display: grid;
+            min-height: 260px;
+            padding: 14px;
+            place-items: center;
+        }
+
+        .image-preview img {
+            display: block;
             max-width: 100%;
+            max-height: 420px;
             height: auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
+            object-fit: contain;
         }
+
+        .pdf-preview {
+            display: block;
+            width: 100%;
+            height: 360px;
+            border: 0;
+            background: #f1f3f8;
+        }
+
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
-            padding-top: 25px;
             height: 0;
+            margin-top: 18px;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #101626;
         }
+
         .video-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             border: 0;
-            border-radius: 4px;
         }
+
+        .card-actions {
+            display: flex;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .text-link {
+            display: inline-flex;
+            min-height: 40px;
+            padding: 8px 13px;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            color: var(--brand-dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .text-link:hover,
+        .text-link:focus-visible {
+            border-color: #b9c5ff;
+            background: #f5f7ff;
+        }
+
         footer {
+            margin-top: 60px;
+            padding: 24px 20px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
             text-align: center;
-            font-size: 0.9em;
-            color: #666;
+            font-size: 0.88rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                width: min(100% - 28px, 1080px);
+                min-height: 62px;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .nav-links a {
+                font-size: 0.84rem;
+            }
+
+            main {
+                width: min(100% - 28px, 1080px);
+            }
+
+            .hero {
+                min-height: 350px;
+                margin-top: 22px;
+                border-radius: 22px;
+            }
+
+            .about-card,
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card--video {
+                grid-column: auto;
+            }
+
+            .section-heading {
+                align-items: start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .nav {
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2px;
+                padding: 9px 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .product-card {
+                padding: 17px;
+            }
+
+            .pdf-preview {
+                height: 280px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Công nghệ số trong cuộc sống hiện nay</h1>
-        <p>Trang web hiển thị Infographic sản phẩm số kết hợp video chia sẻ về cách công nghệ số đang biến đổi cách chúng ta sống, làm việc, tối ưu hóa hiệu suất và khai phá tiềm năng sáng tạo từ các nguồn tài liệu miễn phí bản quyền.</p>
+    <header class="site-header">
+        <nav class="nav" aria-label="Điều hướng chính">
+            <a class="brand" href="#trang-chu">HỒ SƠ CÁ NHÂN</a>
+            <div class="nav-links">
+                <a href="#gioi-thieu">Giới thiệu</a>
+                <a href="#san-pham">Sản phẩm</a>
+            </div>
+        </nav>
     </header>
 
-    <section>
-        <h2>1. Infographic Sản Phẩm</h2>
-        <div class="media-container">
-            <img src="Lab05_Ex2.1.png" alt="Infographic Công nghệ số trong cuộc sống hiện nay">
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Video Minh Họa</h2>
-        <div class="media-container">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/4oeboeFNmm0?si=06ZUy2PZdM8PfFiL" title="Công nghệ số trong cuộc sống hiện nay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <main id="trang-chu">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <p class="eyebrow">Xin chào, mình là</p>
+                <h1 id="hero-title">Lưu Tuấn Minh</h1>
+                <p class="hero-role">Sinh viên ngành An toàn thông tin</p>
+                <p class="hero-intro">Mình là sinh viên ngành An toàn thông tin, yêu thích đọc sách và tìm hiểu cách bảo vệ thế giới số. Chào mừng bạn đến với trang cá nhân, nơi mình chia sẻ đôi nét về bản thân và những sản phẩm nội dung số đã thực hiện.</p>
+                <a class="button" href="#san-pham">Khám phá sản phẩm <span aria-hidden="true">&nbsp;↓</span></a>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="gioi-thieu" aria-labelledby="about-title">
+            <div class="section-heading">
+                <div>
+                    <h2 id="about-title">Đôi nét về mình</h2>
+                    <p>Một vài thông tin để bạn hiểu thêm về mình.</p>
+                </div>
+            </div>
+            <div class="about-card">
+                <div>
+                    <h3>Câu chuyện của mình</h3>
+                    <p>Mình đang theo học ngành An toàn thông tin và quan tâm đến việc xây dựng một không gian số an toàn hơn. Ngoài giờ học, mình thích đọc sách và khám phá những ý tưởng mới.</p>
+                </div>
+                <dl class="profile-details">
+                    <div>
+                        <dt>Họ và tên</dt>
+                        <dd>Lưu Tuấn Minh</dd>
+                    </div>
+                    <div>
+                        <dt>Lĩnh vực</dt>
+                        <dd>An toàn thông tin</dd>
+                    </div>
+                    <div>
+                        <dt>Sở thích</dt>
+                        <dd>Đọc sách</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section id="san-pham" aria-labelledby="products-title">
+            <div class="section-heading">
+                <div>
+                    <h2 id="products-title">Sản phẩm của mình</h2>
+                    <p>Ba sản phẩm số về chủ đề công nghệ trong cuộc sống hiện nay.</p>
+                </div>
+            </div>
+
+            <div class="products">
+                <article class="product-card">
+                    <div class="product-topline">
+                        <span class="product-type">Tài liệu PDF</span>
+                        <span class="product-number">01</span>
+                    </div>
+                    <h3>Tài liệu sản phẩm</h3>
+                    <p>Mở tài liệu PDF để xem nội dung sản phẩm.</p>
+                    <div class="product-preview">
+                        <iframe class="pdf-preview" src="Lab05_Ex1.2.pdf.pdf" title="Xem trước tài liệu PDF">
+                            Trình duyệt không hỗ trợ xem PDF.
+                            <a href="Lab05_Ex1.2.pdf.pdf">Tải tài liệu PDF</a>.
+                        </iframe>
+                    </div>
+                    <div class="card-actions">
+                        <a class="text-link" href="Lab05_Ex1.2.pdf.pdf" target="_blank" rel="noopener">Mở PDF</a>
+                        <a class="text-link" href="Lab05_Ex1.2.pdf.pdf" download>Tải PDF</a>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-topline">
+                        <span class="product-type">Hình ảnh PNG</span>
+                        <span class="product-number">02</span>
+                    </div>
+                    <h3>Infographic công nghệ số</h3>
+                    <p>Hình ảnh infographic về công nghệ số trong cuộc sống hiện nay.</p>
+                    <div class="product-preview image-preview">
+                        <img src="Lab05_Ex2.1.png" alt="Infographic về công nghệ số trong cuộc sống hiện nay" loading="lazy">
+                    </div>
+                    <div class="card-actions">
+                        <a class="text-link" href="Lab05_Ex2.1.png" target="_blank" rel="noopener">Xem ảnh gốc</a>
+                        <a class="text-link" href="Lab05_Ex2.1.png" download>Tải ảnh PNG</a>
+                    </div>
+                </article>
+
+                <article class="product-card product-card--video">
+                    <div class="product-topline">
+                        <span class="product-type">Video YouTube</span>
+                        <span class="product-number">03</span>
+                    </div>
+                    <h3>Công nghệ số trong cuộc sống hiện nay</h3>
+                    <p>Video minh họa chia sẻ về cách công nghệ số đang thay đổi cuộc sống và công việc.</p>
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/4oeboeFNmm0"
+                            title="Video: Công nghệ số trong cuộc sống hiện nay"
+                            loading="lazy"
+                            referrerpolicy="origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="card-actions">
+                        <a class="text-link" href="https://www.youtube.com/watch?v=4oeboeFNmm0" target="_blank" rel="noopener noreferrer">Xem trên YouTube</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 Bản quyền nội dung thuộc về Tác giả | Mã nguồn HTML được hỗ trợ phát triển bởi GitHub Copilot AI.</p>
+        <p>&copy; 2026 Lưu Tuấn Minh · Trang giới thiệu cá nhân và sản phẩm số</p>
     </footer>
-
 </body>
 </html>
